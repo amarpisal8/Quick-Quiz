@@ -1,0 +1,33 @@
+body {
+  background: #0f172a;
+  color: #fff;
+  min-height: 100vh;
+}
+
+.quiz-box {
+  max-width: 600px;
+  margin-top: 80px;
+  background: #1e293b;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.option {
+  background: #334155;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: #475569;
+}
+
+.correct {
+  color: #22c55e;
+}
+
+.wrong {
+  color: #ef4444;
+}
