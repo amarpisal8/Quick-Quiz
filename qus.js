@@ -1,222 +1,222 @@
 const quizData = [
   {
     id: 1,
-    question: "Reference to labour welfare and safety in ancient India is found in which book?",
+    question: "Industrial emergencies are broadly classified into how many categories?",
     options: [
-      "Manusmriti",
-      "Arthashastra by Kautilya",
-      "Rigveda",
-      "Bhagavad Gita"
+      "One",
+      "Two",
+      "Three",
+      "Four"
     ],
     correctAnswer: 1
   },
   {
     id: 2,
-    question: "According to history, organized labour laws first originated in which country?",
+    question: "Which of the following is an On-site Emergency?",
     options: [
-      "India",
-      "USA",
-      "England",
-      "France"
+      "Accident affecting nearby public area",
+      "Accident confined within factory premises",
+      "Natural disaster outside factory",
+      "Traffic accident outside industry"
     ],
-    correctAnswer: 2
+    correctAnswer: 1
   },
   {
     id: 3,
-    question: "Labour legislation history in England dates back to which century?",
+    question: "Off-site emergency refers to an incident which?",
     options: [
-      "12th century",
-      "13th century",
-      "14th century",
-      "15th century"
+      "Occurs during night shift",
+      "Is limited to one department",
+      "Spreads outside factory premises",
+      "Occurs only due to fire"
     ],
     correctAnswer: 2
   },
   {
     id: 4,
-    question: "Which statute made labour compulsory and fixed maximum wages in England?",
+    question: "Who is responsible for preparation of On-site Emergency Plan?",
     options: [
-      "Factory Act",
-      "Statute of Labourers",
-      "Apprenticeship Act",
-      "Trade Union Act"
+      "Safety Officer",
+      "Factory Inspector",
+      "Occupier",
+      "Local Authority"
+    ],
+    correctAnswer: 2
+  },
+  {
+    id: 5,
+    question: "On-site Emergency Plan became mandatory after which major incident?",
+    options: [
+      "Chernobyl disaster",
+      "Bhopal Gas Tragedy",
+      "Fukushima disaster",
+      "Texas refinery fire"
     ],
     correctAnswer: 1
   },
   {
-    id: 5,
-    question: "The Statute of Labourers was passed in England in which years?",
-    options: [
-      "1349–1350",
-      "1400–1410",
-      "1450–1460",
-      "1500–1510"
-    ],
-    correctAnswer: 0
-  },
-  {
     id: 6,
-    question: "Which Act extended restrictions on labour and apprenticeship in England?",
+    question: "Which section of the Factories Act mandates preparation of On-site Emergency Plan?",
     options: [
-      "Factory Act",
-      "Mines Act",
-      "Apprenticeship Act of 1562",
-      "Labour Reform Act"
+      "Section 11",
+      "Section 21",
+      "Section 41(B)(4)",
+      "Section 92"
     ],
     correctAnswer: 2
   },
   {
     id: 7,
-    question: "The Apprenticeship Act of 1562 was finally repealed in which year?",
+    question: "Under MSIHC Rules, which rule requires On-site Emergency Plan?",
     options: [
-      "1850",
-      "1865",
-      "1875",
-      "1890"
+      "Rule 5",
+      "Rule 10",
+      "Rule 13",
+      "Rule 17"
     ],
     correctAnswer: 2
   },
   {
     id: 8,
-    question: "Labour laws from the 19th century were mainly aimed to protect whom?",
+    question: "Mock drill for On-site Emergency Plan shall be conducted at least once in?",
     options: [
-      "Employers",
-      "Government",
-      "Workers",
-      "Trade unions"
+      "Three months",
+      "Six months",
+      "One year",
+      "Two years"
     ],
-    correctAnswer: 2
+    correctAnswer: 1
   },
   {
     id: 9,
-    question: "In which year did the US Supreme Court uphold a law limiting women’s working hours in mines?",
+    question: "Emergency Control Centre is mainly used for?",
     options: [
-      "1885",
-      "1898",
-      "1908",
-      "1915"
+      "Production planning",
+      "Handling and coordination of emergency",
+      "Worker attendance only",
+      "Security monitoring"
     ],
     correctAnswer: 1
   },
   {
     id: 10,
-    question: "Initially, labour legislation was justified mainly for which groups?",
+    question: "Which of the following is NOT a facility in Emergency Control Centre?",
     options: [
-      "Adult men",
-      "Skilled workers",
-      "Children and women",
-      "Supervisors"
+      "Internal and external communication",
+      "Hazardous material records",
+      "Production incentive records",
+      "Plant layout showing emergency exits"
     ],
     correctAnswer: 2
   },
   {
     id: 11,
-    question: "Muller vs Oregon (1908) case is related to regulation of working hours of?",
+    question: "Assembly point is defined as?",
     options: [
-      "Children",
-      "Men",
-      "Women",
-      "All workers"
+      "Place for safety meetings",
+      "Location for parking vehicles",
+      "Pre-determined safe place for evacuated persons",
+      "Medical treatment room"
     ],
     correctAnswer: 2
   },
   {
     id: 12,
-    question: "Holden vs Hardy (1898) case dealt with regulation of labour in?",
+    question: "Who should assemble at the assembly point during emergency?",
     options: [
-      "Healthy occupations",
-      "Unhealthy occupations",
-      "Office work",
-      "Agriculture"
+      "Only permanent employees",
+      "Only contract workers",
+      "Only visitors",
+      "All employees, contract workers and visitors"
+    ],
+    correctAnswer: 3
+  },
+  {
+    id: 13,
+    question: "Which of the following is a main element of On-site Emergency Plan?",
+    options: [
+      "Sales planning",
+      "Leadership and administration",
+      "Production scheduling",
+      "Marketing communication"
     ],
     correctAnswer: 1
   },
   {
-    id: 13,
-    question: "The Oregon statute of 1903 limited women’s work to how many hours per day?",
-    options: [
-      "8 hours",
-      "9 hours",
-      "10 hours",
-      "12 hours"
-    ],
-    correctAnswer: 2
-  },
-  {
     id: 14,
-    question: "In 1915, California statute limited women’s work to how many hours per week?",
+    question: "Protection of vital records is included in?",
     options: [
-      "40 hours",
-      "44 hours",
-      "48 hours",
-      "54 hours"
+      "Maintenance policy",
+      "Fire prevention plan",
+      "On-site Emergency Plan",
+      "Quality management system"
     ],
     correctAnswer: 2
   },
   {
     id: 15,
-    question: "Child labour laws were introduced mainly to?",
+    question: "Which equipment is essential for emergency communication?",
     options: [
-      "Increase production",
-      "Protect children from hazardous work",
-      "Support employers",
-      "Reduce wages"
+      "Lathe machine",
+      "Walkie-talkie",
+      "Forklift",
+      "Compressor"
     ],
     correctAnswer: 1
   },
   {
     id: 16,
-    question: "Which authority was considered the guardian of children under child labour laws?",
+    question: "Emergency preparedness plan mainly focuses on?",
     options: [
-      "Employer",
-      "Parents only",
-      "State",
-      "Trade unions"
+      "Profit increase",
+      "Accident prevention only",
+      "Preparedness and response to major accidents",
+      "Employee promotion"
     ],
     correctAnswer: 2
   },
   {
     id: 17,
-    question: "Common law foundation of labour laws in England focused on?",
+    question: "Which document should be readily available for Inspector after mock drill?",
     options: [
-      "Profit maximization",
-      "Protection and improvement",
-      "Industrial expansion",
-      "Worker discipline"
-    ],
-    correctAnswer: 1
-  },
-  {
-    id: 18,
-    question: "One of the main reasons for labour legislation was to protect workers from?",
-    options: [
-      "Government control",
-      "Trade unions",
-      "Exploitation by employers",
-      "Automation"
+      "Salary register",
+      "Audit report",
+      "Mock drill report",
+      "Production report"
     ],
     correctAnswer: 2
   },
   {
-    id: 19,
-    question: "Early labour laws in England were initially framed in whose interest?",
+    id: 18,
+    question: "Mutual aid in emergency means?",
     options: [
-      "Workers",
-      "Employers",
-      "State",
-      "Trade unions"
+      "Internal help within department",
+      "Help from nearby industries",
+      "Government compensation",
+      "Insurance coverage"
     ],
     correctAnswer: 1
   },
   {
-    id: 20,
-    question: "Safety and health legislation gradually evolved due to?",
+    id: 19,
+    question: "Emergency plans should be revised?",
     options: [
-      "Political pressure only",
-      "Industrial development and social awareness",
-      "Trade competition",
-      "Technological unemployment"
+      "Never",
+      "Only after accident",
+      "Periodically",
+      "Once in 10 years"
     ],
-    correctAnswer: 1
+    correctAnswer: 2
+  },
+  {
+    id: 20,
+    question: "Post-emergency status is generally described as?",
+    options: [
+      "Simple",
+      "Routine",
+      "Extremely complicated",
+      "Unimportant"
+    ],
+    correctAnswer: 2
   }
 ];
