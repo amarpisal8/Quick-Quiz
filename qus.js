@@ -19,7 +19,7 @@ const quizData = [
       "Employers",
       "Government"
     ],
-    correctAnswer: 2
+    correctAnswer: 2 
   },
   {
     id: 3,
