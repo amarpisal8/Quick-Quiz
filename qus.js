@@ -100,7 +100,7 @@ const quizData = [
     correctAnswer: 1
   },
 
-  // ===== EMERGENCY : ON-SITE & OFF-SITE =====
+  // ===== EMERGENCY  : ON-SITE & OFF-SITE =====
   {
     id: 10,
     question: "Industrial emergencies are classified into how many main categories?",
