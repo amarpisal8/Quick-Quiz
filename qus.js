@@ -1,188 +1,106 @@
 const quizData = [
-  // ===== HISTORY OF LABOUR LAW =====
   {
     id: 1,
-    question: "Reference to labour welfare and safety in ancient India is found in which book?",
+    question: "Which ancient Indian text mentions issues related to labour welfare and safety?",
     options: [
       "Manusmriti",
-      "Arthashastra by Kautilya",
+      "Arthashastra of Kautilya",
       "Rigveda",
-      "Mahabharata"
+      "Upanishads"
     ],
     correctAnswer: 1
   },
   {
     id: 2,
-    question: "Organized labour legislation first developed significantly in which country?",
+    question: "The earliest labour laws in England primarily protected the interests of whom?",
     options: [
-      "India",
-      "USA",
-      "England",
-      "Germany"
+      "Employees",
+      "Trade unions",
+      "Employers",
+      "Government"
     ],
     correctAnswer: 2
   },
   {
     id: 3,
-    question: "Labour legislation history in England dates back to which century?",
+    question: "Which Act made labour compulsory and fixed maximum wages in England?",
     options: [
-      "12th century",
-      "13th century",
-      "14th century",
-      "16th century"
-    ],
-    correctAnswer: 2
-  },
-  {
-    id: 4,
-    question: "The Statute of Labourers (1349–1350) was enacted mainly in whose interest?",
-    options: [
-      "Workers",
-      "Employers",
-      "Trade unions",
-      "State only"
+      "Factory Act",
+      "Statute of Labourers",
+      "Apprenticeship Act",
+      "Trade Union Act"
     ],
     correctAnswer: 1
   },
   {
-    id: 5,
-    question: "Which Act extended labour restrictions in England during the 16th century?",
+    id: 4,
+    question: "In which century did labour laws start focusing on workers’ safety and health?",
     options: [
-      "Factory Act",
-      "Mines Act",
-      "Apprenticeship Act, 1562",
-      "Trade Union Act"
+      "14th century",
+      "16th century",
+      "18th century",
+      "19th century"
     ],
-    correctAnswer: 2
+    correctAnswer: 3
+  },
+  {
+    id: 5,
+    question: "Which US court case allowed regulation of women’s working hours?",
+    options: [
+      "Holden vs Hardy",
+      "Muller vs Oregon",
+      "Miller vs Wilson",
+      "Brown vs Board"
+    ],
+    correctAnswer: 1
   },
   {
     id: 6,
-    question: "Labour laws from the 19th century were mainly enacted to protect?",
+    question: "Child labour laws mainly aimed to:",
     options: [
-      "Employers",
-      "Government revenue",
-      "Workers’ safety and health",
-      "Industrial profits"
+      "Increase productivity",
+      "Protect children from hazardous work",
+      "Support employers",
+      "Reduce wages"
     ],
-    correctAnswer: 2
+    correctAnswer: 1
   },
   {
     id: 7,
-    question: "Muller vs Oregon (1908) case is related to regulation of working hours of?",
+    question: "Which type of emergency affects areas outside factory premises?",
     options: [
-      "Children",
-      "Men",
-      "Women",
-      "All workers"
+      "Internal emergency",
+      "On-site emergency",
+      "Off-site emergency",
+      "Local emergency"
     ],
     correctAnswer: 2
   },
   {
     id: 8,
-    question: "Holden vs Hardy (1898) case justified regulation of labour in?",
+    question: "On-site emergency primarily affects:",
     options: [
-      "Healthy occupations",
-      "Unhealthy occupations",
-      "Agricultural work",
-      "Office work"
+      "Nearby villages",
+      "Only factory premises",
+      "Entire district",
+      "State boundary"
     ],
     correctAnswer: 1
   },
   {
     id: 9,
-    question: "Child labour laws were introduced mainly to?",
+    question: "Preparation of On-site Emergency Plan is mandatory under which Act?",
     options: [
-      "Increase productivity",
-      "Protect children from hazardous work",
-      "Support employers",
-      "Reduce training cost"
+      "Environment Protection Act",
+      "Factories Act, 1948",
+      "Labour Welfare Act",
+      "Disaster Management Act"
     ],
     correctAnswer: 1
   },
-
-  // ===== EMERGENCY  : ON-SITE & OFF-SITE =====
   {
     id: 10,
-    question: "Industrial emergencies are classified into how many main categories?",
-    options: [
-      "One",
-      "Two",
-      "Three",
-      "Four"
-    ],
-    correctAnswer: 1
-  },
-  {
-    id: 11,
-    question: "An accident confined within factory premises is called?",
-    options: [
-      "Off-site emergency",
-      "Natural emergency",
-      "On-site emergency",
-      "External emergency"
-    ],
-    correctAnswer: 2
-  },
-  {
-    id: 12,
-    question: "Off-site emergency refers to an incident which?",
-    options: [
-      "Occurs during night shift",
-      "Is limited to one department",
-      "Spreads outside factory premises",
-      "Occurs only due to fire"
-    ],
-    correctAnswer: 2
-  },
-  {
-    id: 13,
-    question: "On-site Emergency Plan became mandatory after which disaster?",
-    options: [
-      "Chernobyl disaster",
-      "Bhopal Gas Tragedy",
-      "Fukushima disaster",
-      "Texas explosion"
-    ],
-    correctAnswer: 1
-  },
-  {
-    id: 14,
-    question: "Who is responsible for preparation of On-site Emergency Plan?",
-    options: [
-      "Safety Officer",
-      "Inspector of Factories",
-      "Occupier",
-      "Local Authority"
-    ],
-    correctAnswer: 2
-  },
-
-  // ===== STATUTORY & EMERGENCY PLAN =====
-  {
-    id: 15,
-    question: "Which section of the Factories Act mandates On-site Emergency Plan?",
-    options: [
-      "Section 21",
-      "Section 41(B)(4)",
-      "Section 92",
-      "Section 11"
-    ],
-    correctAnswer: 1
-  },
-  {
-    id: 16,
-    question: "Under MSIHC Rules, On-site Emergency Plan is required under which rule?",
-    options: [
-      "Rule 5",
-      "Rule 10",
-      "Rule 13",
-      "Rule 17"
-    ],
-    correctAnswer: 2
-  },
-  {
-    id: 17,
-    question: "Mock drill of On-site Emergency Plan must be conducted at least once in?",
+    question: "Mock drill of On-site Emergency Plan must be conducted at least once in:",
     options: [
       "3 months",
       "6 months",
@@ -192,92 +110,112 @@ const quizData = [
     correctAnswer: 1
   },
   {
-    id: 18,
-    question: "Emergency Control Centre is mainly meant for?",
+    id: 11,
+    question: "Who is responsible for preparing the On-site Emergency Plan?",
     options: [
-      "Production control",
-      "Handling and coordination of emergency",
-      "Worker training",
-      "Security surveillance"
+      "Safety Officer",
+      "Factory Inspector",
+      "Occupier",
+      "Contractor"
+    ],
+    correctAnswer: 2
+  },
+  {
+    id: 12,
+    question: "Emergency Control Centre mainly functions to:",
+    options: [
+      "Store raw materials",
+      "Coordinate emergency operations",
+      "Conduct training",
+      "Maintain payroll"
     ],
     correctAnswer: 1
+  },
+  {
+    id: 13,
+    question: "Which of the following is NOT a facility of Emergency Control Centre?",
+    options: [
+      "Internal communication",
+      "Pollution records",
+      "Canteen facility",
+      "Plant layout"
+    ],
+    correctAnswer: 2
+  },
+  {
+    id: 14,
+    question: "Assembly point should be located:",
+    options: [
+      "Near hazardous storage",
+      "Inside production area",
+      "Away from affected area",
+      "Near main gate only"
+    ],
+    correctAnswer: 2
+  },
+  {
+    id: 15,
+    question: "Which element ensures coordination with external agencies during emergency?",
+    options: [
+      "Medical care",
+      "Communication",
+      "Training",
+      "Public relation"
+    ],
+    correctAnswer: 1
+  },
+  {
+    id: 16,
+    question: "Protection of vital records is included in:",
+    options: [
+      "Safety policy",
+      "On-site Emergency Plan",
+      "Factory licence",
+      "Standing orders"
+    ],
+    correctAnswer: 1
+  },
+  {
+    id: 17,
+    question: "Which law limited women working hours to 10 hours per day in factories?",
+    options: [
+      "Utah Statute",
+      "Oregon Statute",
+      "California Act",
+      "Factory Act"
+    ],
+    correctAnswer: 1
+  },
+  {
+    id: 18,
+    question: "Off-site emergency planning mainly involves coordination with:",
+    options: [
+      "Workers only",
+      "Factory management only",
+      "District authorities",
+      "Trade unions"
+    ],
+    correctAnswer: 2
   },
   {
     id: 19,
-    question: "Which of the following should be available in Emergency Control Centre?",
+    question: "Which of the following is a key element of On-site Emergency Plan?",
     options: [
-      "Sales records",
-      "Hazardous material records",
-      "Marketing plans",
-      "Profit statements"
+      "Production planning",
+      "Leadership and administration",
+      "Marketing strategy",
+      "Financial audit"
     ],
     correctAnswer: 1
   },
-
-  // ===== ASSEMBLY POINT & ELEMENTS =====
   {
     id: 20,
-    question: "Assembly point is defined as?",
+    question: "The main objective of labour legislation is to:",
     options: [
-      "Meeting hall",
-      "Parking area",
-      "Pre-determined safe place for evacuated persons",
-      "Medical room"
-    ],
-    correctAnswer: 2
-  },
-  {
-    id: 21,
-    question: "Who should assemble at the assembly point during emergency?",
-    options: [
-      "Only permanent workers",
-      "Only contract workers",
-      "Only visitors",
-      "All workers, contract workers and visitors"
-    ],
-    correctAnswer: 3
-  },
-  {
-    id: 22,
-    question: "Which of the following is a main element of On-site Emergency Plan?",
-    options: [
-      "Sales strategy",
-      "Leadership and administration",
-      "Production planning",
-      "Marketing communication"
-    ],
-    correctAnswer: 1
-  },
-  {
-    id: 23,
-    question: "Mutual aid in emergency means?",
-    options: [
-      "Help from insurance company",
-      "Help from nearby industries",
-      "Internal departmental help",
-      "Government compensation"
-    ],
-    correctAnswer: 1
-  },
-  {
-    id: 24,
-    question: "Emergency plans should be revised?",
-    options: [
-      "Never",
-      "Only after accident",
-      "Periodically",
-      "Once in 10 years"
-    ],
-    correctAnswer: 2
-  },
-  {
-    id: 25,
-    question: "Post-emergency status is generally described as?",
-    options: [
-      "Simple",
-      "Routine",
-      "Extremely complicated",
-      "Unimportant"
+      "Increase profits",
+      "Control workers",
+      "Protect health and safety of workers",
+      "Reduce employment"
     ],
     correctAnswer: 2
   }
