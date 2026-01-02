@@ -1,0 +1,222 @@
+const quizData = [
+  {
+    id: 1,
+    question: "On-site emergency plan is applicable when an accident occurs?",
+    options: [
+      "Outside factory premises",
+      "Inside factory premises only",
+      "In nearby residential area",
+      "At district level"
+    ],
+    correctAnswer: 1
+  },
+  {
+    id: 2,
+    question: "Who is responsible for preparing the On-site Emergency Plan?",
+    options: [
+      "Safety Officer",
+      "Factory Inspector",
+      "Occupier of factory",
+      "State Government"
+    ],
+    correctAnswer: 2
+  },
+  {
+    id: 3,
+    question: "After Bhopal gas tragedy, special provisions were added to Factories Act in which year?",
+    options: [
+      "1984",
+      "1985",
+      "1987",
+      "1991"
+    ],
+    correctAnswer: 2
+  },
+  {
+    id: 4,
+    question: "Mock drill for On-site Emergency Plan must be conducted at least once in?",
+    options: [
+      "Every year",
+      "Every three months",
+      "Every six months",
+      "Every month"
+    ],
+    correctAnswer: 2
+  },
+  {
+    id: 5,
+    question: "Which section of Factories Act mandates On-site Emergency Plan?",
+    options: [
+      "Section 7A",
+      "Section 41(B)(4)",
+      "Section 92",
+      "Section 87"
+    ],
+    correctAnswer: 1
+  },
+  {
+    id: 6,
+    question: "Main purpose of Emergency Control Centre is to?",
+    options: [
+      "Store safety equipment",
+      "Direct and coordinate emergency operations",
+      "Conduct training programs",
+      "Issue factory licenses"
+    ],
+    correctAnswer: 1
+  },
+  {
+    id: 7,
+    question: "Who declares the emergency in the factory?",
+    options: [
+      "Safety Officer",
+      "Work Incident Controller",
+      "Works Main Controller",
+      "Medical Officer"
+    ],
+    correctAnswer: 2
+  },
+  {
+    id: 8,
+    question: "The Works Main Controller is generally?",
+    options: [
+      "Safety Supervisor",
+      "Plant Manager / General Manager",
+      "Fire Officer",
+      "Personnel Officer"
+    ],
+    correctAnswer: 1
+  },
+  {
+    id: 9,
+    question: "Who is responsible for fire fighting during emergency?",
+    options: [
+      "Medical Officer",
+      "Security and Fire Officer",
+      "Communication Officer",
+      "Personnel Officer"
+    ],
+    correctAnswer: 1
+  },
+  {
+    id: 10,
+    question: "Who maintains the incident log book?",
+    options: [
+      "Works Main Controller",
+      "Communication Officer",
+      "Security Officer",
+      "Telephone Operator"
+    ],
+    correctAnswer: 1
+  },
+  {
+    id: 11,
+    question: "Who ensures ambulance reaches nearest hospital?",
+    options: [
+      "Security Officer",
+      "Works Incident Controller",
+      "Medical Officer",
+      "Personnel Officer"
+    ],
+    correctAnswer: 2
+  },
+  {
+    id: 12,
+    question: "Personnel/Administrative Officer mainly acts as?",
+    options: [
+      "Fire fighter",
+      "Liaison officer",
+      "Incident controller",
+      "Alarm operator"
+    ],
+    correctAnswer: 1
+  },
+  {
+    id: 13,
+    question: "Assembly point is meant for?",
+    options: [
+      "Parking vehicles",
+      "Storing equipment",
+      "Assembling evacuated persons",
+      "Medical treatment"
+    ],
+    correctAnswer: 2
+  },
+  {
+    id: 14,
+    question: "Which team controls visitors and vehicle entry during emergency?",
+    options: [
+      "Transport team",
+      "Fire team",
+      "Security team",
+      "Safety team"
+    ],
+    correctAnswer: 2
+  },
+  {
+    id: 15,
+    question: "Which of the following is NOT a communication system?",
+    options: [
+      "Walky-talky",
+      "Intercom",
+      "Siren",
+      "Fire extinguisher"
+    ],
+    correctAnswer: 3
+  },
+  {
+    id: 16,
+    question: "Emergency siren is operated after assessing?",
+    options: [
+      "Weather condition",
+      "Gravity of situation",
+      "Production loss",
+      "Shift timing"
+    ],
+    correctAnswer: 1
+  },
+  {
+    id: 17,
+    question: "Which team provides first aid during emergency?",
+    options: [
+      "Transport team",
+      "Communication team",
+      "Fire team",
+      "First aid and medical team"
+    ],
+    correctAnswer: 3
+  },
+  {
+    id: 18,
+    question: "Who informs external agencies like police and fire services?",
+    options: [
+      "Telephone Operator",
+      "Communication Officer",
+      "Security Officer",
+      "Works Incident Controller"
+    ],
+    correctAnswer: 1
+  },
+  {
+    id: 19,
+    question: "Which essential work includes ambient air quality testing?",
+    options: [
+      "Security duty",
+      "Emergency engineering works",
+      "Medical treatment",
+      "Assembly management"
+    ],
+    correctAnswer: 1
+  },
+  {
+    id: 20,
+    question: "Alarm system selection depends mainly on?",
+    options: [
+      "Number of workers",
+      "Size and hazard nature of plant",
+      "Factory location",
+      "Working hours"
+    ],
+    correctAnswer: 1
+  }
+];
