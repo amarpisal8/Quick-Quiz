@@ -255,6 +255,7 @@ function loadQuestion() {
       if (statuses[currentIndex] === 'none') statuses[currentIndex] = 'attempt';
       renderQuestionBar();
       renderDashboard();
+      syncMobileControls();
     });
   });
 
@@ -380,6 +381,45 @@ document.addEventListener('DOMContentLoaded', function () {
       const pressed = savedForLater.includes(currentIndex);
       saveBtn.setAttribute('aria-pressed', pressed ? 'true' : 'false');
       saveBtn.textContent = pressed ? 'Saved' : 'See you later';
+    }
+
+    // Explanation bulb (Marathi) behaviour
+    const expToggle = document.getElementById('exp-toggle');
+    const expPanel = document.getElementById('exp-panel');
+    if (expToggle) {
+      expToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // toggle visibility
+        const isHidden = expPanel && expPanel.hasAttribute('hidden');
+        if (isHidden) {
+          const q = quizData[currentIndex];
+          const text = q && q.exp && q.exp.trim().length ? q.exp : 'स्पष्टीकरण उपलब्ध नाही';
+          if (expPanel) {
+            expPanel.textContent = text;
+            expPanel.removeAttribute('hidden');
+            expPanel.setAttribute('lang', 'mr');
+            expPanel.focus && expPanel.focus();
+          }
+          expToggle.setAttribute('aria-expanded', 'true');
+          // stop blinking while open
+          expToggle.classList.remove('blink');
+        } else {
+          if (expPanel) expPanel.setAttribute('hidden', '');
+          expToggle.setAttribute('aria-expanded', 'false');
+          if (quizData[currentIndex] && quizData[currentIndex].exp) expToggle.classList.add('blink');
+        }
+      });
+
+      // Close explanation when clicking outside
+      document.addEventListener('click', (e) => {
+        if (expPanel && !expPanel.hasAttribute('hidden')) {
+          if (!expPanel.contains(e.target) && e.target !== expToggle && !expToggle.contains(e.target)) {
+            expPanel.setAttribute('hidden', '');
+            expToggle.setAttribute('aria-expanded', 'false');
+            if (quizData[currentIndex] && quizData[currentIndex].exp) expToggle.classList.add('blink');
+          }
+        }
+      });
     }
 
     // Initialize dashboard toggle behaviour

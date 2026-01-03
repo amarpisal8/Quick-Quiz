@@ -37,7 +37,14 @@
 <canvas id="bg"></canvas>
 
 <div class="container quiz-box" data-aos="zoom-in">
-  <h3 id="question"></h3>
+  <div class="question-row d-flex align-items-start justify-content-between">
+    <h3 id="question" class="mb-0"></h3>
+    <button id="exp-toggle" class="exp-bulb d-none" aria-expanded="false" aria-controls="exp-panel" aria-label="स्पष्टीकरण (मराठी)">
+      <i class="fa fa-lightbulb"></i>
+    </button>
+  </div>
+
+  <div id="exp-panel" class="explanation-panel mt-2" hidden aria-live="polite" lang="mr"></div>
 
   <div id="options" class="mt-3"></div>
 
