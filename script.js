@@ -52,12 +52,25 @@ let savedForLater = [];
 
 function toggleSaveForLater(idx) {
   const i = savedForLater.indexOf(idx);
-  const adding = (i === -1);
+  const adding = i === -1;
   if (adding) savedForLater.push(idx);
   else savedForLater.splice(i, 1);
   localStorage.setItem('saved_for_later', JSON.stringify(savedForLater));
   renderDashboard();
   renderQuestionBar();
+
+  const saveBtnEl = document.getElementById('saveLater');
+  if (saveBtnEl) saveBtnEl.setAttribute('aria-pressed', adding ? 'true' : 'false');
+
+  // Provide a quick visual confirmation on the button
+  if (adding && saveBtnEl) {
+    const old = saveBtnEl.textContent;
+    saveBtnEl.textContent = 'Saved';
+    setTimeout(() => {
+      // restore label for current question if not saved
+      saveBtnEl.textContent = savedForLater.includes(currentIndex) ? 'Saved' : 'See you later';
+    }, 900);
+  }
 
   // If the user just saved this question, automatically move to the next one (if any)
   if (adding) {
@@ -109,32 +122,44 @@ function renderDashboard() {
   }
 }
 
-// Hook save button
-const saveBtn = document.getElementById('saveLater');
-if (saveBtn) saveBtn.addEventListener('click', () => toggleSaveForLater(currentIndex));
-
-// Dashboard toggle for small screens
 function initDashboardToggle() {
   const dashToggle = document.getElementById('dashboard-toggle');
-  if (!dashToggle) return;
+  const dash = document.getElementById('result-dashboard');
+  if (!dashToggle || !dash) return;
+
+  // set initial aria-hidden
+  dash.setAttribute('aria-hidden', dash.classList.contains('open') ? 'false' : 'true');
+
   dashToggle.addEventListener('click', () => {
-    const dash = document.getElementById('result-dashboard');
-    if (!dash) return;
     const open = dash.classList.toggle('open');
     dashToggle.textContent = open ? 'Hide' : 'Saved';
     dashToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    dash.setAttribute('aria-hidden', open ? 'false' : 'true');
 
     // If dashboard is opened, ensure it renders current state
     if (open) renderDashboard();
   });
 }
-
-initDashboardToggle();
 // Ensure dashboard updates when statuses change
 function notifyStatusChange() {
   renderDashboard();
 }
 
+/* Sync mobile action buttons with desktop controls */
+function syncMobileControls() {
+  const nextDesktop = document.getElementById('nextBtn');
+  const mobileNext = document.getElementById('mobileNext');
+  const mobileSubmit = document.getElementById('mobileSubmit');
+  if (nextDesktop && mobileNext) {
+    if (nextDesktop.classList.contains('d-none')) mobileNext.classList.add('d-none');
+    else mobileNext.classList.remove('d-none');
+  }
+  const selected = document.querySelector('input[name="option"]:checked');
+  if (mobileSubmit) {
+    if (selected) mobileSubmit.removeAttribute('disabled');
+    else mobileSubmit.setAttribute('disabled', 'true');
+  }
+}
 
 function formatTime(totalSec) {
   const mm = Math.floor(totalSec / 60).toString().padStart(2, '0');
@@ -234,7 +259,8 @@ function loadQuestion() {
   });
 
   renderQuestionBar();
-}
+  syncMobileControls();
+} 
 
 function submitAnswer() {
   const selected = document.querySelector('input[name="option"]:checked');
@@ -261,6 +287,8 @@ function submitAnswer() {
 
   if (currentIndex === quizData.length - 1)
     document.getElementById("finalSubmit").classList.remove("d-none");
+
+  syncMobileControls();
 }
 
 function nextQuestion() {
@@ -271,6 +299,7 @@ function nextQuestion() {
     return;
   }
   loadQuestion();
+  syncMobileControls();
 }
 
 function finalSubmit() {
@@ -343,24 +372,18 @@ document.addEventListener('DOMContentLoaded', function () {
     renderQuestionBar();
     renderDashboard();
 
-    // Hook save button
+    // Hook save button (single handler)
     const saveBtn = document.getElementById('saveLater');
-    if (saveBtn) saveBtn.addEventListener('click', () => {
-      toggleSaveForLater(currentIndex);
-      localStorage.setItem('saved_for_later', JSON.stringify(savedForLater));
-    });
-
-    // Dashboard toggle for small screens
-    const dashToggle = document.getElementById('dashboard-toggle');
-    if (dashToggle) {
-      dashToggle.addEventListener('click', () => {
-        const dash = document.getElementById('result-dashboard');
-        if (!dash) return;
-        const open = dash.classList.toggle('open');
-        dashToggle.textContent = open ? 'Hide' : 'Show';
-        dashToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => toggleSaveForLater(currentIndex));
+      // reflect saved state in aria-pressed and label
+      const pressed = savedForLater.includes(currentIndex);
+      saveBtn.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+      saveBtn.textContent = pressed ? 'Saved' : 'See you later';
     }
+
+    // Initialize dashboard toggle behaviour
+    initDashboardToggle();
   }
 });
 

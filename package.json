@@ -1,0 +1,10 @@
+{
+  "name": "quick-quiz",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,css,html,json}\"",
+    "lint": "eslint . --ext .js"
+  },
+  "devDependencies": {}
+}
