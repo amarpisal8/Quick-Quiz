@@ -349,11 +349,34 @@ body {
     font-size: 1.05rem;
   }
 
+  .app-header .d-flex {
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .app-title {
+    font-size: 1.125rem;
+    text-align: center;
+  }
+
+  .timer {
+    min-width: auto;
+    padding: 8px 12px;
+  }
+
   .option {
     padding: 16px;
     font-size: 1rem;
     min-height: 56px;
   }
+
+  .question-bar {
+    padding-left: calc(12px + var(--safe-left));
+    padding-right: calc(12px + var(--safe-right));
+  }
+
+  .question-item { min-width: 48px; height: 48px; }
 
   .theme-btn {
     width: 44px;
