@@ -114,17 +114,22 @@ const saveBtn = document.getElementById('saveLater');
 if (saveBtn) saveBtn.addEventListener('click', () => toggleSaveForLater(currentIndex));
 
 // Dashboard toggle for small screens
-const dashToggle = document.getElementById('dashboard-toggle');
-if (dashToggle) {
+function initDashboardToggle() {
+  const dashToggle = document.getElementById('dashboard-toggle');
+  if (!dashToggle) return;
   dashToggle.addEventListener('click', () => {
     const dash = document.getElementById('result-dashboard');
     if (!dash) return;
     const open = dash.classList.toggle('open');
-    dashToggle.textContent = open ? 'Hide' : 'Show';
+    dashToggle.textContent = open ? 'Hide' : 'Saved';
     dashToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+    // If dashboard is opened, ensure it renders current state
+    if (open) renderDashboard();
   });
 }
 
+initDashboardToggle();
 // Ensure dashboard updates when statuses change
 function notifyStatusChange() {
   renderDashboard();
