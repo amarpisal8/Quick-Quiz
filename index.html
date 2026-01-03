@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Quiz App</title>
 
   <!-- Bootstrap -->
@@ -17,6 +18,17 @@
 </head>
 
 <body>
+<button id="theme-toggle" class="theme-btn" aria-label="Toggle theme" title="Toggle theme"><i class="fa fa-moon"></i></button>
+
+<header class="app-header container" role="banner">
+  <div class="d-flex align-items-center justify-content-between py-2">
+    <h1 class="app-title mb-0">Quiz App</h1>
+    <div class="d-flex align-items-center gap-3">
+      <div id="progress" class="muted">Q <span id="q-index">1</span>/<span id="q-total">0</span></div>
+      <div id="timer" class="timer" aria-live="polite">Time: 00:00</div>
+    </div>
+  </div>
+</header>
 
 <!-- Three.js Background -->
 <canvas id="bg"></canvas>
@@ -32,10 +44,35 @@
 
   <p id="result" class="mt-3"></p>
 
-  <button class="btn btn-success mt-3 d-none" id="nextBtn" onclick="nextQuestion()">Next</button>
+  <div class="d-flex gap-2 align-items-center mt-2">
+    <button class="btn btn-outline-secondary" id="saveLater">See you later</button>
+    <button class="btn btn-success d-none" id="nextBtn" onclick="nextQuestion()">Next</button>
+  </div>
 
   <button class="btn btn-danger mt-4 d-none" id="finalSubmit" onclick="finalSubmit()">Final Submit</button>
 </div>
+
+<!-- Result dashboard (right) -->
+<aside id="result-dashboard" class="result-dashboard" aria-label="Quiz results">
+  <div class="dashboard-inner">
+    <h3 class="mb-2">Results</h3>
+    <div class="dashboard-percent" id="dashboard-percent">0%</div>
+    <ul class="dashboard-list">
+      <li>Total: <span id="dash-total">0</span></li>
+      <li>Correct: <span id="dash-correct">0</span></li>
+      <li>Wrong: <span id="dash-wrong">0</span></li>
+      <li>Unsolved: <span id="dash-unsolved">0</span></li>
+    </ul>
+    <div class="mt-2">
+      <h5 class="mb-1">Saved for later <span id="saved-count">0</span></h5>
+      <div id="saved-list" class="saved-list"></div>
+    </div>
+    <button id="dashboard-toggle" class="dashboard-toggle d-none" aria-expanded="false">Show</button>
+  </div>
+</aside>
+
+<!-- Question tracker (bottom nav) -->
+<div id="question-bar" class="question-bar" role="navigation" aria-label="Question navigation"></div>
 
 <script src="qus.js"></script>
 <script src="script.js"></script>

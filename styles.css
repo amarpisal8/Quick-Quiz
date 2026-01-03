@@ -1,33 +1,312 @@
+:root {
+  --bg: #f8fafc;
+  --text: #0f172a;
+  --card-bg: #ffffff;
+  --option-bg: #f1f5f9;
+  --option-hover: #e2e8f0;
+  --success: #16a34a;
+  --danger: #ef4444;
+  --muted: #6b7280;
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --text: #ffffff;
+  --card-bg: #1e293b;
+  --option-bg: #334155;
+  --option-hover: #475569;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --muted: #9ca3af;
+}
+
 body {
-  background: #0f172a;
-  color: #fff;
+  background: var(--bg);
+  color: var(--text);
   min-height: 100vh;
+  transition: background-color .3s, color .3s;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+}
+
+#bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
 }
 
 .quiz-box {
   max-width: 600px;
-  margin-top: 80px;
-  background: #1e293b;
+  margin: 80px auto;
+  background: var(--card-bg);
+  color: var(--text);
   padding: 25px;
   border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(11,15,30,0.08);
 }
 
 .option {
-  background: #334155;
+  background: var(--option-bg);
   padding: 12px;
   margin: 8px 0;
   border-radius: 8px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color .15s ease;
+}
+
+.option input {
+  margin: 0;
+  accent-color: var(--text);
 }
 
 .option:hover {
-  background: #475569;
+  background: var(--option-hover);
 }
 
 .correct {
-  color: #22c55e;
+  color: var(--success);
+  font-weight: 600;
 }
 
 .wrong {
-  color: #ef4444;
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.theme-btn {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 1100;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(0,0,0,0.06);
+  backdrop-filter: blur(6px);
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+  background: transparent;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.app-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.timer {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.04);
+  color: var(--text);
+  font-weight: 700;
+  min-width: 96px;
+  text-align: center;
+}
+
+.timer.warning {
+  background: rgba(239,68,68,0.08);
+  color: var(--danger);
+  box-shadow: 0 0 0 6px rgba(239,68,68,0.03);
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Question tracker (fixed bottom) */
+.question-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1200;
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
+  backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(0,0,0,0.06);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.question-item {
+  min-width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-weight: 700;
+  background: var(--option-bg);
+  color: var(--text);
+  border: 1px solid rgba(0,0,0,0.06);
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.question-item:focus {
+  outline: 3px solid rgba(59,130,246,0.18);
+  outline-offset: 2px;
+}
+.question-item.active {
+  box-shadow: 0 6px 18px rgba(11,15,30,0.08);
+  transform: translateY(-2px);
+}
+
+.question-item.status-none {
+  background: #f3f4f6; /* light grey - without attempt */
+  color: var(--muted);
+}
+
+.question-item.status-attempt {
+  background: #e5e7eb; /* darker grey - attempted but not solved */
+  color: var(--text);
+}
+
+.question-item.status-correct {
+  background: var(--success);
+  color: #fff;
+}
+
+.question-item.status-wrong {
+  background: var(--danger);
+  color: #fff;
+}
+
+.question-item.status-saved {
+  background: #fb923c; /* orange */
+  color: #fff;
+}
+
+.saved-indicator { color: #fbbf24; margin-left: 4px; }
+/* Result dashboard (right side) */
+.result-dashboard {
+  position: fixed;
+  right: 12px;
+  top: calc(56px + 20px); /* 20px gap from header/timer */
+  width: 260px;
+  max-width: 45%;
+  bottom: 84px; /* keep above the question bar */
+  z-index: 1190;
+  background: var(--card-bg);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(11,15,30,0.08);
+  padding: 12px;
+  overflow: auto;
+}
+
+.result-dashboard .dashboard-percent {
+  font-size: 1.75rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.result-dashboard .dashboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: var(--muted);
+}
+
+.result-dashboard .saved-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.result-dashboard .saved-item {
+  padding: 6px 8px;
+  background: var(--option-bg);
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.result-dashboard .saved-item:hover { opacity: 0.95; }
+
+.dashboard-toggle {
+  display: none;
+  margin-top: 8px;
+}
+
+/* Small screens: make dashboard slide in */
+@media (max-width: 900px) {
+  .result-dashboard {
+    right: 12px;
+    width: 280px;
+    top: auto;
+    bottom: 110px; /* above question bar, leave extra space */
+    transform: translateX(0);
+  }
+
+  .dashboard-toggle.d-none { display: inline-block; }
+}
+
+@media (max-width: 420px) {
+  .result-dashboard { width: 220px; }
+}
+
+/* Add space at bottom so content doesn't sit under the bar */
+body {
+  padding-bottom: 84px;
+}
+
+/* Responsive rules for phones (Samsung, iPhone typical widths) */
+@media (max-width: 420px) {
+  .quiz-box {
+    margin-top: 40px;
+    padding: 18px;
+    max-width: 92%;
+  }
+
+  h3 {
+    font-size: 1.05rem;
+  }
+
+  .option {
+    padding: 14px;
+    font-size: 0.95rem;
+  }
+
+  .theme-btn {
+    width: 40px;
+    height: 40px;
+    top: 10px;
+    right: 10px;
+  }
+
+  #bg { display: none; }
+}
+
+@media (max-width: 360px) {
+  .quiz-box {
+    margin-top: 30px;
+    padding: 14px;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
 }
