@@ -7,6 +7,11 @@
   --success: #16a34a;
   --danger: #ef4444;
   --muted: #6b7280;
+
+  /* Header spacing tokens */
+  --header-gap: 14px; /* space between header items */
+  --header-padding-h: 14px; /* horizontal padding inside header */
+  --header-min-height: 56px; /* minimum header height (including safe top) */
 }
 
 [data-theme="dark"] {
@@ -36,8 +41,10 @@ body {
 }
 
 .quiz-box {
-  max-width: 600px;
-  margin: 80px auto;
+  /* allow wider layout on larger screens but remain fluid */
+  max-width: 820px;
+  width: min(94%, 820px);
+  margin: 80px auto 120px; /* keep space at bottom for fixed bars */
   background: var(--card-bg);
   color: var(--text);
   padding: 25px;
@@ -98,16 +105,68 @@ body {
   top: 0;
   z-index: 1050;
   background: transparent;
-  padding-top: 6px;
-  padding-bottom: 6px;
+  /* Respect device safe top inset and keep a comfortable header height */
+  padding-top: calc(10px + var(--safe-top));
+  padding-bottom: 10px;
+  /* create a subtle boundary so header elements don't feel cramped */
+  padding-left: calc(var(--header-padding-h) + var(--safe-left));
+  padding-right: calc(var(--header-padding-h) + var(--safe-right));
+  min-height: var(--header-min-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Ensure inner d-flex row inside header uses consistent gaps and alignment */
+.app-header .d-flex {
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--header-gap);
+  display: flex;
+}
+
+/* Auto-hide header when scrolling down: slide up and fade out */
+.app-header {
+  transition: transform .22s ease, opacity .22s ease;
+}
+
+.app-header.hidden {
+  transform: translateY(calc(-100% - 8px));
+  opacity: 0;
+  pointer-events: none;
+}
 .app-title {
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0;
+  /* allow title to truncate when space is tight */
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
+/* Center the timer in the header on larger screens */
+.header-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1060;
+  pointer-events: none; /* let other header controls receive pointer events */
+}
+.header-center .timer { pointer-events: auto; }
+
+/* On small screens the header stacks vertically so the timer should be in flow */
+@media (max-width: 420px) {
+  .header-center {
+    position: static;
+    transform: none;
+    margin-top: 8px;
+    pointer-events: auto;
+  }
+}
 .timer {
   padding: 6px 10px;
   border-radius: 8px;
@@ -145,8 +204,18 @@ body {
   backdrop-filter: blur(6px);
   border-top: 1px solid rgba(0,0,0,0.06);
   overflow-x: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  touch-action: pan-x;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  /* Smooth scrolling and snap to keep the first item visible on mobile */
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
 }
+
+.question-item { scroll-snap-align: center; }
 
 .question-item {
   min-width: 44px;
@@ -264,7 +333,18 @@ body {
   padding: 12px;
   overflow: auto;
   transition: transform .22s ease, opacity .22s ease;
-} 
+  /* hidden by default - only show when explicitly opened */
+  transform: translateY(18px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* When the dashboard has the 'open' class it becomes visible */
+.result-dashboard.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
 
 .result-dashboard .dashboard-percent {
   font-size: 1.75rem;
@@ -273,6 +353,94 @@ body {
   margin-bottom: 8px;
 }
 
+/* Floating result toggle (rectangular) — now positioned bottom center */
+.result-toggle {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  /* place above the question tracker/dashboard area */
+  bottom: calc(84px + var(--safe-bottom));
+  z-index: 1310;
+  background: var(--card-bg);
+  color: var(--text);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 10px;
+  min-width: 120px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  box-shadow: 0 6px 18px rgba(11,15,30,0.06);
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease;
+  /* Improve touch responsiveness */
+  touch-action: manipulation;
+  -ms-touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0,0,0,0.06);
+  -webkit-user-select: none;
+}
+
+/* Slightly smaller icon and bold label */
+.result-toggle i { font-size: 1rem; }
+.result-toggle .result-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1;
+  margin-left: 2px;
+}
+
+.result-toggle .result-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  background: var(--option-bg);
+  color: var(--text);
+  padding: 4px 8px;
+  border-radius: 999px;
+  margin-left: 6px;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+
+/* Focus and hover states */
+.result-toggle:focus,
+.result-toggle:hover {
+  box-shadow: 0 8px 26px rgba(11,15,30,0.08);
+  transform: translate(-50%, -2px);
+  outline: none;
+}
+
+/* Touch-specific larger hit area for devices without hover */
+@media (hover: none) and (pointer: coarse) {
+  .result-toggle { min-width: 120px; height: 56px; padding: 8px 14px; }
+  .result-toggle .result-badge { padding: 6px 10px; }
+}
+
+/* On small screens we move the toggle further up to avoid overlapping the mobile actions and keep label visible */
+@media (max-width: 420px) {
+  /* Move results toggle to top-left on mobile as requested and show icon-only */
+  .result-toggle {
+    top: calc(12px + var(--safe-top));
+    left: calc(12px + var(--safe-left));
+    bottom: auto;
+    transform: none;
+    min-width: 44px;
+    width: 44px;
+    height: 44px;
+    padding: 6px;
+    border-radius: 50%;
+    justify-content: center;
+  }
+
+  /* Hide the textual label and percent badge on phones so only the logo is visible */
+  .result-toggle .result-label { display: none; }
+  .result-toggle .result-badge { display: none; }
+
+  /* ensure results dashboard sits above mobile actions when opened */
+  .result-dashboard { width: 260px; bottom: calc(160px + var(--safe-bottom)); }
+
+  /* keep mobile action bar visible and avoid overlap */
+  .mobile-actions { bottom: calc(12px + var(--safe-bottom)); }
+}
 .result-dashboard .dashboard-list {
   list-style: none;
   padding: 0;
@@ -434,10 +602,21 @@ body {
 
   #bg { display: none; }
 
-  /* show mobile action bar and hide desktop submit to avoid duplicate controls */
-  .mobile-actions { display: flex; }
-  .quiz-box > .btn.btn-primary { display: none; }
+  /* show mobile action bar (do NOT hide desktop submit buttons per request) */
+  .mobile-actions { 
+    display: flex; 
+    background: var(--card-bg);
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(11,15,30,0.06);
+    backdrop-filter: blur(6px);
+    /* position mobile actions above the question tracker */
+    bottom: calc(76px + var(--safe-bottom));
+  }
+  /* Keep desktop submit visible on small screens to avoid overriding actions */
   .mobile-actions .btn + .btn { margin-left: 8px; }
+  /* ensure quiz content has room for the mobile-actions bar */
+  .quiz-box { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
 }
 
 @media (max-width: 375px) {
