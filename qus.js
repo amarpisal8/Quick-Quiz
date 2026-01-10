@@ -1,127 +1,222 @@
 const quizData = [
   {
     id: 1,
-    question: "On-site emergency plan is applicable when an accident occurs?",
+    question: "What is an emergency?",
     options: [
-      "Outside factory premises",
-      "Inside factory premises only",
-      "In nearby residential area",
-      "At district level",
+      "A planned routine activity",
+      "A situation demanding immediate action",
+      "A long-term business strategy",
+      "A scheduled safety drill"
     ],
-    correctAnswer: 1,
+    correctAnswer: 1
   },
   {
     id: 2,
-    question: "Who is responsible for preparing the On-site Emergency Plan?",
-    options: ["Safety Officer", "Factory Inspector", "Occupier of factory", "State Government"],
-    correctAnswer: 2,
+    question: "An emergency event is generally described as:",
+    options: [
+      "A planned incident",
+      "An unplanned event threatening people or property",
+      "A seasonal occurrence",
+      "A controlled industrial process"
+    ],
+    correctAnswer: 1
   },
   {
     id: 3,
-    question: "After Bhopal gas tragedy, special provisions were added to Factories Act in which year?",
-    options: ["1984", "1985", "1987", "1991"],
-    correctAnswer: 2,
+    question: "Which of the following can be the result of an emergency?",
+    options: [
+      "Improved productivity",
+      "Life and death situation",
+      "Increased profits",
+      "Routine maintenance"
+    ],
+    correctAnswer: 1
   },
   {
     id: 4,
-    question: "Mock drill for On-site Emergency Plan must be conducted at least once in?",
-    options: ["Every year", "Every three months", "Every six months", "Every month"],
-    correctAnswer: 2,
+    question: "Emergency can occur at:",
+    options: [
+      "Only workplace",
+      "Only public places",
+      "Any time and any place",
+      "Only during working hours"
+    ],
+    correctAnswer: 2
   },
   {
     id: 5,
-    question: "Which section of Factories Act mandates On-site Emergency Plan?",
-    options: ["Section 7A", "Section 41(B)(4)", "Section 92", "Section 87"],
-    correctAnswer: 1,
+    question: "Emergency situations may cause:",
+    options: [
+      "Only financial loss",
+      "Only environmental damage",
+      "Physical or environmental damage",
+      "Only machine breakdown"
+    ],
+    correctAnswer: 2
   },
   {
     id: 6,
-    question: "Main purpose of Emergency Control Centre is to?",
-    options: ["Store safety equipment", "Direct and coordinate emergency operations", "Conduct training programs", "Issue factory licenses"],
-    correctAnswer: 1,
+    question: "Emergency can be broadly classified as:",
+    options: [
+      "Industrial and domestic",
+      "Minor and major",
+      "Natural and man-made",
+      "Internal and external"
+    ],
+    correctAnswer: 2
   },
   {
     id: 7,
-    question: "Who declares the emergency in the factory?",
-    options: ["Safety Officer", "Work Incident Controller", "Works Main Controller", "Medical Officer"],
-    correctAnswer: 2,
+    question: "Which of the following is a natural disaster?",
+    options: [
+      "Chemical poisoning",
+      "Bomb threat",
+      "Earthquake",
+      "Power disruption"
+    ],
+    correctAnswer: 2
   },
   {
     id: 8,
-    question: "The Works Main Controller is generally?",
-    options: ["Safety Supervisor", "Plant Manager / General Manager", "Fire Officer", "Personnel Officer"],
-    correctAnswer: 1,
+    question: "Which is an example of a man-made emergency?",
+    options: [
+      "Cyclone",
+      "Flood",
+      "Forest fire",
+      "Chemical poisoning"
+    ],
+    correctAnswer: 3
   },
   {
     id: 9,
-    question: "Who is responsible for fire fighting during emergency?",
-    options: ["Medical Officer", "Security and Fire Officer", "Communication Officer", "Personnel Officer"],
-    correctAnswer: 1,
+    question: "Emergency Preparedness and Response Plan mainly outlines:",
+    options: [
+      "Production schedule",
+      "Emergency management system",
+      "Quality control system",
+      "Maintenance procedures"
+    ],
+    correctAnswer: 1
   },
   {
     id: 10,
-    question: "Who maintains the incident log book?",
-    options: ["Works Main Controller", "Communication Officer", "Security Officer", "Telephone Operator"],
-    correctAnswer: 1,
+    question: "Which disaster may occur due to human failure?",
+    options: [
+      "Cloud burst",
+      "Structural fault",
+      "Landslide",
+      "Heat wave"
+    ],
+    correctAnswer: 1
   },
   {
     id: 11,
-    question: "Who ensures ambulance reaches nearest hospital?",
-    options: ["Security Officer", "Works Incident Controller", "Medical Officer", "Personnel Officer"],
-    correctAnswer: 2,
+    question: "Emergency response determines:",
+    options: [
+      "Profit margin",
+      "Employee attendance",
+      "Difference between life and death",
+      "Routine safety inspection"
+    ],
+    correctAnswer: 2
   },
   {
     id: 12,
-    question: "Personnel/Administrative Officer mainly acts as?",
-    options: ["Fire fighter", "Liaison officer", "Incident controller", "Alarm operator"],
-    correctAnswer: 1,
+    question: "Which of the following is NOT mentioned as an emergency cause?",
+    options: [
+      "Earthquake",
+      "Terrorist attack",
+      "Employee promotion",
+      "Fire accident"
+    ],
+    correctAnswer: 2
   },
   {
     id: 13,
-    question: "Assembly point is meant for?",
-    options: ["Parking vehicles", "Storing equipment", "Assembling evacuated persons", "Medical treatment"],
-    correctAnswer: 2,
+    question: "Who is designated to oversee emergency preparedness?",
+    options: [
+      "Safety supervisor",
+      "Crisis response manager",
+      "Maintenance engineer",
+      "HR manager"
+    ],
+    correctAnswer: 1
   },
   {
     id: 14,
-    question: "Which team controls visitors and vehicle entry during emergency?",
-    options: ["Transport team", "Fire team", "Security team", "Safety team"],
-    correctAnswer: 2,
+    question: "Purpose of EPR Plan is to:",
+    options: [
+      "Increase production capacity",
+      "Outline emergency management system",
+      "Improve employee discipline",
+      "Control quality defects"
+    ],
+    correctAnswer: 1
   },
   {
     id: 15,
-    question: "Which of the following is NOT a communication system?",
-    options: ["Walky-talky", "Intercom", "Siren", "Fire extinguisher"],
-    correctAnswer: 3,
+    question: "Interaction with which agencies is mandatory during emergencies?",
+    options: [
+      "Banks and insurance companies",
+      "Suppliers and vendors",
+      "Police, fire brigade and healthcare departments",
+      "Transport contractors"
+    ],
+    correctAnswer: 2
   },
   {
     id: 16,
-    question: "Emergency siren is operated after assessing?",
-    options: ["Weather condition", "Gravity of situation", "Production loss", "Shift timing"],
-    correctAnswer: 1,
+    question: "Which of the following is a primary objective of EPR Plan?",
+    options: [
+      "Profit maximization",
+      "Preservation of life",
+      "Expansion of plant",
+      "Employee promotion"
+    ],
+    correctAnswer: 1
   },
   {
     id: 17,
-    question: "Which team provides first aid during emergency?",
-    options: ["Transport team", "Communication team", "Fire team", "First aid and medical team"],
-    correctAnswer: 3,
+    question: "Protection of property falls under:",
+    options: [
+      "Secondary objective",
+      "Legal objective",
+      "Primary objective",
+      "Optional objective"
+    ],
+    correctAnswer: 2
   },
   {
     id: 18,
-    question: "Who informs external agencies like police and fire services?",
-    options: ["Telephone Operator", "Communication Officer", "Security Officer", "Works Incident Controller"],
-    correctAnswer: 1,
+    question: "Continuity of operations means:",
+    options: [
+      "Stopping all work permanently",
+      "Running production at high speed",
+      "Resuming essential activities after emergency",
+      "Changing management structure"
+    ],
+    correctAnswer: 2
   },
   {
     id: 19,
-    question: "Which essential work includes ambient air quality testing?",
-    options: ["Security duty", "Emergency engineering works", "Medical treatment", "Assembly management"],
-    correctAnswer: 1,
+    question: "Responsibility and authority matrix is related to:",
+    options: [
+      "Salary structure",
+      "Emergency roles and functions",
+      "Leave management",
+      "Quality assurance"
+    ],
+    correctAnswer: 1
   },
   {
     id: 20,
-    question: "Alarm system selection depends mainly on?",
-    options: ["Number of workers", "Size and hazard nature of plant", "Factory location", "Working hours"],
-    correctAnswer: 1,
-  },
+    question: "Which is an accepted fact regarding emergencies?",
+    options: [
+      "They always give prior warning",
+      "They cause no casualties",
+      "They may continue for prolonged period",
+      "They are easy to control"
+    ],
+    correctAnswer: 2
+  }
 ];
