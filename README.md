@@ -26,3 +26,17 @@ Notes
   - Safe-area notch is respected (controls not clipped) thanks to `viewport-fit=cover`.
   - Tap targets are easy to press and the question tracker scrolls horizontally.
 - For real-device testing: serve the app locally (e.g., `npx serve`) or use a tunnel and open the URL on the device.
+
+## Save Test (Persistent) — Added feature
+
+A lightweight persistent "Save Test" feature has been added using IndexedDB (file: `storage.js`). Key points:
+
+- Save Test stores the entire test (questions array) in an immutable record and prevents duplicates using a deterministic content hash.
+- Attempts are tracked separately and stored as history entries.
+- New API (available via `TestStorage` global):
+  - `TestStorage.saveTest(testObj)` — save a test (returns `{ saved, test }`)
+  - `TestStorage.getSavedTest(testId)` — returns `{ test, questions, lastAttempt }` or `null`
+  - `TestStorage.loadTestById(testId)` — loads a saved test into the running app (deep-cloned)
+  - `TestStorage.getAllTests()` — list saved tests
+
+Manual testing checklist is in `TESTING.md`.

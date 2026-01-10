@@ -14,6 +14,13 @@ function renderQuestionBar() {
   if (!bar || !Array.isArray(quizData)) return;
   bar.innerHTML = '';
 
+  // Ensure navigation starts from first question on initial render
+  if (typeof navInitialized === 'undefined') window.navInitialized = false;
+  if (!navInitialized) {
+    if (typeof currentIndex !== 'undefined') currentIndex = 0;
+    else window.currentIndex = 0;
+  }
+
   quizData.forEach((q, idx) => {
     const status = statuses[idx] || 'none';
     let cls = `question-item status-${status}`;
@@ -44,6 +51,29 @@ function renderQuestionBar() {
       renderDashboard();
     });
     bar.appendChild(btn);
+  });
+
+  // After rendering, ensure correct item is visible. On initial render, show the first question explicitly.
+  requestAnimationFrame(() => {
+    const active = bar.querySelector('.question-item.active');
+    if (!navInitialized) {
+      // show the first question at the start and focus it for accessibility
+      try {
+        bar.scrollTo({ left: 0, behavior: 'smooth' });
+        const first = bar.querySelector('.question-item:first-child');
+        if (first) {
+          first.focus({ preventScroll: true });
+          first.setAttribute('aria-current', 'true');
+        }
+      } catch (e) { bar.scrollLeft = 0; }
+      navInitialized = true;
+    } else if (active) {
+      // ensure the active question is scrolled into view
+      try { active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); } catch (e) { /* fallback */ }
+      // manage aria-current for non-initial navigations
+      bar.querySelectorAll('.question-item').forEach(btn => btn.removeAttribute('aria-current'));
+      active && active.setAttribute('aria-current', 'true');
+    }
   });
 }
 
@@ -104,6 +134,10 @@ function renderDashboard() {
   if (dashUnsolved) dashUnsolved.innerText = unsolved;
   if (dashPercent) dashPercent.innerText = percent + '%';
 
+  // Keep the floating badge in sync so it shows live progress even when the dashboard is closed
+  const resultBadge = document.getElementById('result-badge');
+  if (resultBadge) resultBadge.innerText = percent + '%';
+
   if (savedCount) savedCount.innerText = savedForLater.length;
   if (savedList) {
     savedList.innerHTML = '';
@@ -125,21 +159,89 @@ function renderDashboard() {
 function initDashboardToggle() {
   const dashToggle = document.getElementById('dashboard-toggle');
   const dash = document.getElementById('result-dashboard');
-  if (!dashToggle || !dash) return;
+  const resultIcon = document.getElementById('result-icon');
+  const dashExit = document.getElementById('dashboard-exit');
+  if (!dash || !resultIcon) return;
 
-  // set initial aria-hidden
-  dash.setAttribute('aria-hidden', dash.classList.contains('open') ? 'false' : 'true');
+  // hide dashboard initially
+  dash.classList.remove('open');
+  dash.setAttribute('aria-hidden', 'true');
+  resultIcon.setAttribute('aria-expanded', 'false');
 
-  dashToggle.addEventListener('click', () => {
+  // helper to toggle the dashboard
+  function toggleResultPanel() {
     const open = dash.classList.toggle('open');
-    dashToggle.textContent = open ? 'Hide' : 'Saved';
-    dashToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    resultIcon.setAttribute('aria-expanded', open ? 'true' : 'false');
     dash.setAttribute('aria-hidden', open ? 'false' : 'true');
-
-    // If dashboard is opened, ensure it renders current state
     if (open) renderDashboard();
+  }
+
+  // pointerup handles touch/pen devices quickly and prevents click duplication
+  resultIcon.addEventListener('pointerup', (e) => {
+    if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+      window._lastTouch = Date.now();
+      toggleResultPanel();
+      e.preventDefault();
+    }
   });
+
+  // click handles mouse/keyboard interactions; ignore if a recent touch occurred
+  resultIcon.addEventListener('click', (e) => {
+    const now = Date.now();
+    if (window._lastTouch && (now - window._lastTouch) < 700) return;
+    toggleResultPanel();
+  });
+
+  // If there's an existing dashboard toggle (for small screens), wire it to the same behavior
+  if (dashToggle) {
+    dashToggle.addEventListener('click', () => {
+      const open = dash.classList.toggle('open');
+      dashToggle.textContent = open ? 'Hide' : 'Saved';
+      dashToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      resultIcon.setAttribute('aria-expanded', open ? 'true' : 'false');
+      dash.setAttribute('aria-hidden', open ? 'false' : 'true');
+      if (open) renderDashboard();
+    });
+  }
+
+  // Exit button inside dashboard just closes the panel and returns to the test
+  if (dashExit) {
+    dashExit.addEventListener('click', () => {
+      dash.classList.remove('open');
+      dash.setAttribute('aria-hidden', 'true');
+      resultIcon.setAttribute('aria-expanded', 'false');
+    });
+  }
 }
+
+// Auto-hide header on scroll (fade/slide when scrolling down, reveal on scroll up)
+function initAutoHideHeader() {
+  const header = document.querySelector('.app-header');
+  if (!header) return;
+  let lastY = window.scrollY || window.pageYOffset;
+  let ticking = false;
+  const threshold = 8; // ignore tiny scrolls
+
+  function onScroll() {
+    const y = window.scrollY || window.pageYOffset;
+    if (Math.abs(y - lastY) < threshold) { ticking = false; return; }
+    if (y > lastY && y > 60) {
+      header.classList.add('hidden');
+    } else {
+      header.classList.remove('hidden');
+    }
+    lastY = y;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+  }, { passive: true });
+
+  // Ensure header reappears on resize or orientation change
+  window.addEventListener('resize', () => header.classList.remove('hidden'));
+}
+
 // Ensure dashboard updates when statuses change
 function notifyStatusChange() {
   renderDashboard();
@@ -259,6 +361,25 @@ function loadQuestion() {
     });
   });
 
+  // When an option label (or its children) is clicked, select that option's input
+  const optionsContainer = document.getElementById('options');
+  if (optionsContainer && !optionsContainer.dataset.autoSelectAttached) {
+    optionsContainer.addEventListener('click', (e) => {
+      const label = e.target.closest('.option');
+      if (!label || !optionsContainer.contains(label)) return;
+      const input = label.querySelector('input[name="option"]');
+      if (!input) return;
+      // If not already selected, select it and trigger change so UI updates
+      if (!input.checked) {
+        input.checked = true;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      syncMobileControls();
+    });
+    // mark as attached to avoid duplicate listeners on reload
+    optionsContainer.dataset.autoSelectAttached = 'true';
+  }
+
   renderQuestionBar();
   syncMobileControls();
 } 
@@ -306,6 +427,44 @@ function nextQuestion() {
 function finalSubmit() {
   stopTimer();
   generatePDF();
+}
+
+/* Restart current test: clears progress, saved-for-later, and restarts timer */
+function resetTest() {
+  if (!confirm('Restart test? This will clear your progress.')) return;
+  if (!Array.isArray(quizData) || quizData.length === 0) return;
+
+  stopTimer();
+
+  // reset internal state
+  currentIndex = 0;
+  statuses = new Array(quizData.length).fill('none');
+  userAnswers = new Array(quizData.length).fill(null);
+  savedForLater = [];
+  localStorage.removeItem('saved_for_later');
+
+  // restart timer for the test length
+  const totalSeconds = quizData.length * 100;
+  startTimer(totalSeconds);
+
+  // re-render UI
+  loadQuestion();
+  renderQuestionBar();
+  renderDashboard();
+
+  // update save button if present
+  const saveBtnEl = document.getElementById('saveLater');
+  if (saveBtnEl) {
+    saveBtnEl.setAttribute('aria-pressed', 'false');
+    saveBtnEl.textContent = 'See you later';
+  }
+
+  const finalEl = document.getElementById('finalSubmit');
+  if (finalEl) finalEl.classList.add('d-none');
+  const nextBtn = document.getElementById('nextBtn');
+  if (nextBtn) nextBtn.classList.add('d-none');
+
+  alert('Test restarted.');
 }
 
 function generatePDF() {
@@ -383,6 +542,11 @@ document.addEventListener('DOMContentLoaded', function () {
       saveBtn.textContent = pressed ? 'Saved' : 'See you later';
     }
 
+    const resetBtn = document.getElementById('resetBtn');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', resetTest);
+    }
+
     // Explanation bulb (Marathi) behaviour
     const expToggle = document.getElementById('exp-toggle');
     const expPanel = document.getElementById('exp-panel');
@@ -424,6 +588,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize dashboard toggle behaviour
     initDashboardToggle();
+    // Initialize auto-hide header behaviour
+    initAutoHideHeader();
   }
 });
 

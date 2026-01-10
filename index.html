@@ -23,12 +23,24 @@
 <body>
 <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme" title="Toggle theme"><i class="fa fa-moon"></i></button>
 
+<!-- Floating results toggle (shows live percent) -->
+<button id="result-icon" class="result-toggle" aria-label="Show results" aria-expanded="false" title="Show results" type="button">
+  <i class="fa fa-chart-pie" aria-hidden="true"></i>
+  <span class="result-label">Results</span>
+  <span id="result-badge" class="result-badge">0%</span>
+</button>
+
 <header class="app-header container" role="banner">
   <div class="d-flex align-items-center justify-content-between py-2">
     <h1 class="app-title mb-0">Quiz App</h1>
-    <div class="d-flex align-items-center gap-3">
-      <div id="progress" class="muted">Q <span id="q-index">1</span>/<span id="q-total">0</span></div>
+
+    <!-- Centered timer (visually centered in header) -->
+    <div class="header-center" aria-hidden="false">
       <div id="timer" class="timer" aria-live="polite">Time: 00:00</div>
+    </div>
+
+    <div class="d-flex align-items-center gap-3 right-controls">
+      <div id="progress" class="muted">Q <span id="q-index">1</span>/<span id="q-total">0</span></div>
     </div>
   </div>
 </header>
@@ -64,24 +76,81 @@
     >
       See you later
     </button>
+
+    <!-- Save Test button (new) -->
+    <button
+      class="btn btn-outline-primary"
+      id="saveTestBtn"
+      type="button"
+      aria-label="Save test"
+    >
+      Save Test
+    </button>
+
+    <!-- Manage saved tests -->
+    <button
+      class="btn btn-outline-secondary"
+      id="manageSavedBtn"
+      type="button"
+      aria-label="Manage saved tests"
+      data-bs-toggle="modal"
+      data-bs-target="#savedTestsModal"
+    >
+      Saved Tests
+    </button>
+
+    <!-- Restart / Reset test -->
+    <button
+      class="btn btn-outline-danger"
+      id="resetBtn"
+      type="button"
+      aria-label="Restart test"
+      title="Restart test and clear progress"
+    >
+      Restart
+    </button>
+
     <button class="btn btn-success d-none" id="nextBtn" onclick="nextQuestion()">Next</button>
+    <button class="btn btn-success d-none" id="finalSubmit" onclick="finalSubmit()">Final Submit</button>
   </div>
 
-  <button class="btn btn-danger mt-4 d-none" id="finalSubmit" onclick="finalSubmit()">Final Submit</button>
+  <!-- Last attempt info for saved tests -->
+  <div id="last-attempt" class="mt-2 text-muted small" aria-live="polite"></div>
+</div>
 
-  <!-- Mobile action bar -->
-  <div class="mobile-actions d-none" role="toolbar" aria-label="Mobile actions">
-    <button class="btn btn-primary" id="mobileSubmit" onclick="submitAnswer()">
-      <i class="fa fa-check"></i> Submit
-    </button>
-    <button class="btn btn-success d-none" id="mobileNext" onclick="nextQuestion()">Next</button>
+<!-- Mobile action bar (visible on small screens) -->
+<div class="mobile-actions" role="toolbar" aria-label="Mobile actions">
+  <button id="mobileSubmit" class="btn btn-primary" type="button" onclick="submitAnswer()" aria-label="Submit answer">Submit</button>
+  <button id="mobileNext" class="btn btn-outline-success d-none" type="button" onclick="nextQuestion()" aria-label="Next question">Next</button>
+  <button id="mobileSave" class="btn btn-outline-secondary" type="button" onclick="toggleSaveForLater(currentIndex)" aria-label="Save for later">Save</button>
+  <button id="mobileFinal" class="btn btn-danger d-none" type="button" onclick="finalSubmit()" aria-label="Final submit">Finish</button>
+</div>
+
+<!-- Saved Tests modal -->
+<div class="modal fade" id="savedTestsModal" tabindex="-1" aria-labelledby="savedTestsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="savedTestsModalLabel">Saved Tests</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="saved-tests-list">Loading...</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- Result dashboard (right) -->
 <aside id="result-dashboard" class="result-dashboard" role="region" aria-label="Quiz results" aria-hidden="true">
   <div class="dashboard-inner">
-    <h3 class="mb-2">Results</h3>
+    <div class="dashboard-header d-flex align-items-center justify-content-between">
+      <h3 class="mb-2">Results</h3>
+      <button id="dashboard-exit" class="btn btn-outline-secondary btn-sm" type="button" aria-label="Close results">Exit</button>
+    </div>
     <div class="dashboard-percent" id="dashboard-percent" aria-live="polite">0%</div>
     <ul class="dashboard-list">
       <li>Total: <span id="dash-total">0</span></li>
@@ -102,11 +171,16 @@
 
 <script src="qus.js"></script>
 <script src="script.js"></script>
+<script src="storage.js"></script>
+<script src="saved-tests.js"></script>
 
 <!-- Libraries -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<!-- Bootstrap JS (needed for modal) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>AOS.init();</script>
 </body>
