@@ -1,14 +1,11 @@
 /* ==================================================
-   PREMIUM GLASSMORPHISM EXAM THEME
-   Focused • Clean • Mobile-safe • Eye-friendly
+   PREMIUM GLASS EXAM THEME (SAFE VERSION)
 ================================================== */
 
-/* ---------- COLOR SYSTEM ---------- */
 :root {
   --bg: linear-gradient(135deg, #eef2ff, #f8fafc);
-  --glass: rgba(255, 255, 255, 0.75);
-  --glass-strong: rgba(255, 255, 255, 0.85);
-  --glass-dark: rgba(15, 23, 42, 0.6);
+  --glass: rgba(255,255,255,0.75);
+  --glass-strong: rgba(255,255,255,0.88);
 
   --primary: #2563eb;
   --success: #16a34a;
@@ -18,34 +15,23 @@
   --text-main: #0f172a;
   --text-muted: #64748b;
 
-  --border: rgba(255, 255, 255, 0.35);
-
-  --radius-lg: 18px;
-  --radius-md: 14px;
-  --radius-sm: 10px;
-
-  --blur: blur(18px);
+  --border: rgba(255,255,255,0.4);
+  --blur: blur(16px);
 
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* ---------- DARK MODE ---------- */
 [data-theme="dark"] {
   --bg: linear-gradient(135deg, #020617, #0f172a);
-  --glass: rgba(15, 23, 42, 0.65);
-  --glass-strong: rgba(15, 23, 42, 0.8);
-
+  --glass: rgba(15,23,42,0.65);
+  --glass-strong: rgba(15,23,42,0.8);
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
-
-  --border: rgba(255, 255, 255, 0.08);
+  --border: rgba(255,255,255,0.1);
 }
 
-/* ---------- BASE ---------- */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -53,14 +39,15 @@ body {
   background: var(--bg);
   color: var(--text-main);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-  padding-bottom: calc(140px + var(--safe-bottom));
+  /* IMPORTANT: leave room for mobile-actions + question-bar */
+  padding-bottom: calc(180px + var(--safe-bottom));
 }
 
-/* ---------- HEADER ---------- */
+/* ================= HEADER ================= */
 .app-header {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 1100;
   background: var(--glass);
   backdrop-filter: var(--blur);
   border-bottom: 1px solid var(--border);
@@ -68,55 +55,66 @@ body {
 }
 
 .app-title {
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 800;
   text-align: center;
-  letter-spacing: 0.3px;
 }
 
 .timer {
-  margin-top: 8px;
-  text-align: center;
-  padding: 8px 16px;
+  margin-top: 6px;
+  padding: 6px 14px;
   border-radius: 999px;
   font-weight: 800;
   background: var(--glass-strong);
 }
 
 .timer.warning {
-  background: rgba(220,38,38,0.2);
+  background: rgba(220,38,38,0.18);
   color: var(--danger);
 }
 
-/* ---------- QUIZ CARD ---------- */
+/* ================= THEME TOGGLE (FIXED) ================= */
+.theme-btn {
+  position: fixed;
+  top: calc(12px + var(--safe-top));
+  right: 12px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--glass-strong);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--border);
+  z-index: 1500; /* VERY IMPORTANT */
+}
+
+/* ================= QUIZ CARD ================= */
 .quiz-box {
   max-width: 860px;
   margin: 40px auto 0;
-  padding: 28px;
+  padding: 26px;
   background: var(--glass);
   backdrop-filter: var(--blur);
-  border-radius: var(--radius-lg);
+  border-radius: 18px;
   border: 1px solid var(--border);
   box-shadow: 0 20px 50px rgba(0,0,0,0.12);
 }
 
 #question {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
-/* ---------- OPTIONS ---------- */
+/* ================= OPTIONS ================= */
 .option {
   display: flex;
   gap: 12px;
-  padding: 18px;
-  margin-top: 14px;
+  padding: 16px;
+  margin-top: 12px;
   background: var(--glass-strong);
-  border-radius: var(--radius-md);
-  border: 1px solid transparent;
+  border-radius: 14px;
   cursor: pointer;
-  transition: 0.2s ease;
+  border: 1px solid transparent;
 }
 
 .option:hover {
@@ -128,34 +126,19 @@ body {
   accent-color: var(--primary);
 }
 
-.option-text {
-  font-size: 1rem;
-  line-height: 1.5;
-}
+/* ================= RESULT TEXT ================= */
+.correct { color: var(--success); font-weight: 800; }
+.wrong { color: var(--danger); font-weight: 800; }
+.muted { color: var(--text-muted); }
 
-/* ---------- RESULT TEXT ---------- */
-.correct {
-  color: var(--success);
-  font-weight: 800;
-}
-
-.wrong {
-  color: var(--danger);
-  font-weight: 800;
-}
-
-.muted {
-  color: var(--text-muted);
-}
-
-/* ---------- QUESTION BAR ---------- */
+/* ================= QUESTION NAV BAR (FIXED) ================= */
 .question-bar {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1200;
-  padding: 12px 14px;
+  z-index: 1300; /* ABOVE background */
+  padding: 10px 14px calc(10px + var(--safe-bottom));
   display: flex;
   gap: 10px;
   justify-content: center;
@@ -166,8 +149,8 @@ body {
 }
 
 .question-item {
-  min-width: 48px;
-  height: 48px;
+  min-width: 46px;
+  height: 46px;
   border-radius: 14px;
   font-weight: 800;
   background: var(--glass-strong);
@@ -183,54 +166,15 @@ body {
 .status-wrong { background: var(--danger); color: #fff; }
 .status-saved { background: var(--warning); color: #fff; }
 
-/* ---------- RESULT DASHBOARD ---------- */
-.result-dashboard {
-  position: fixed;
-  right: 16px;
-  bottom: 160px;
-  width: 270px;
-  background: var(--glass);
-  backdrop-filter: var(--blur);
-  border-radius: var(--radius-lg);
-  padding: 16px;
-  border: 1px solid var(--border);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.15);
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(20px);
-  transition: 0.25s ease;
-}
-
-.result-dashboard.open {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
-/* ---------- FLOATING RESULT BUTTON ---------- */
-.result-toggle {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: calc(150px + var(--safe-bottom));
-  background: var(--primary);
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 999px;
-  font-weight: 800;
-  box-shadow: 0 12px 30px rgba(37,99,235,0.45);
-  z-index: 1300;
-}
-
-/* ---------- MOBILE ACTION BAR ---------- */
+/* ================= MOBILE ACTION BAR (FIXED) ================= */
 .mobile-actions {
   position: fixed;
   left: 12px;
   right: 12px;
-  bottom: calc(82px + var(--safe-bottom));
+  bottom: calc(66px + var(--safe-bottom)); /* ABOVE question-bar */
   display: none;
   gap: 10px;
-  z-index: 1250;
+  z-index: 1400;
 }
 
 .mobile-actions .btn {
@@ -240,21 +184,46 @@ body {
   font-weight: 700;
 }
 
-/* ---------- THEME TOGGLE ---------- */
-.theme-btn {
+/* ================= RESULT DASHBOARD ================= */
+.result-dashboard {
   position: fixed;
-  top: calc(14px + var(--safe-top));
-  right: 14px;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
+  right: 16px;
+  bottom: 210px; /* ABOVE mobile-actions + question-bar */
+  width: 270px;
   background: var(--glass);
   backdrop-filter: var(--blur);
+  border-radius: 18px;
+  padding: 16px;
   border: 1px solid var(--border);
-  z-index: 1400;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: 0.25s ease;
+  z-index: 1350;
 }
 
-/* ---------- MOBILE SAFE MODE ---------- */
+.result-dashboard.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ================= FLOATING RESULT BUTTON ================= */
+.result-toggle {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(160px + var(--safe-bottom));
+  background: var(--primary);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 800;
+  z-index: 1450;
+}
+
+/* ================= MOBILE RULES ================= */
 @media (max-width: 420px) {
 
   .quiz-box {
@@ -267,7 +236,7 @@ body {
   }
 
   .option {
-    padding: 16px;
+    padding: 15px;
   }
 
   .mobile-actions {
@@ -293,13 +262,11 @@ body {
     justify-content: center;
   }
 
-  .result-toggle span {
-    display: none;
-  }
+  .result-toggle span { display: none; }
 
   .result-dashboard {
     width: 230px;
     right: 12px;
-    bottom: 190px;
+    bottom: 240px;
   }
 }
