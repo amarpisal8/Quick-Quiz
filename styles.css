@@ -1,637 +1,305 @@
-:root {
-  --bg: #f8fafc;
-  --text: #0f172a;
-  --card-bg: #ffffff;
-  --option-bg: #f1f5f9;
-  --option-hover: #e2e8f0;
-  --success: #16a34a;
-  --danger: #ef4444;
-  --muted: #6b7280;
+/* ==================================================
+   PREMIUM GLASSMORPHISM EXAM THEME
+   Focused • Clean • Mobile-safe • Eye-friendly
+================================================== */
 
-  /* Header spacing tokens */
-  --header-gap: 14px; /* space between header items */
-  --header-padding-h: 14px; /* horizontal padding inside header */
-  --header-min-height: 56px; /* minimum header height (including safe top) */
+/* ---------- COLOR SYSTEM ---------- */
+:root {
+  --bg: linear-gradient(135deg, #eef2ff, #f8fafc);
+  --glass: rgba(255, 255, 255, 0.75);
+  --glass-strong: rgba(255, 255, 255, 0.85);
+  --glass-dark: rgba(15, 23, 42, 0.6);
+
+  --primary: #2563eb;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warning: #f59e0b;
+
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+
+  --border: rgba(255, 255, 255, 0.35);
+
+  --radius-lg: 18px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+
+  --blur: blur(18px);
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+/* ---------- DARK MODE ---------- */
 [data-theme="dark"] {
-  --bg: #0f172a;
-  --text: #ffffff;
-  --card-bg: #1e293b;
-  --option-bg: #334155;
-  --option-hover: #475569;
-  --success: #22c55e;
-  --danger: #ef4444;
-  --muted: #9ca3af;
+  --bg: linear-gradient(135deg, #020617, #0f172a);
+  --glass: rgba(15, 23, 42, 0.65);
+  --glass-strong: rgba(15, 23, 42, 0.8);
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+
+  --border: rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- BASE ---------- */
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  transition: background-color .3s, color .3s;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  -webkit-font-smoothing: antialiased;
-}
-
-#bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-}
-
-.quiz-box {
-  /* allow wider layout on larger screens but remain fluid */
-  max-width: 820px;
-  width: min(94%, 820px);
-  margin: 80px auto 120px; /* keep space at bottom for fixed bars */
-  background: var(--card-bg);
-  color: var(--text);
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(11,15,30,0.08);
-}
-
-.option {
-  background: var(--option-bg);
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: background-color .15s ease;
-}
-
-.option input {
   margin: 0;
-  accent-color: var(--text);
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text-main);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  padding-bottom: calc(140px + var(--safe-bottom));
+}
+
+/* ---------- HEADER ---------- */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--glass);
+  backdrop-filter: var(--blur);
+  border-bottom: 1px solid var(--border);
+  padding: calc(14px + var(--safe-top)) 16px 12px;
+}
+
+.app-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+.timer {
+  margin-top: 8px;
+  text-align: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+  background: var(--glass-strong);
+}
+
+.timer.warning {
+  background: rgba(220,38,38,0.2);
+  color: var(--danger);
+}
+
+/* ---------- QUIZ CARD ---------- */
+.quiz-box {
+  max-width: 860px;
+  margin: 40px auto 0;
+  padding: 28px;
+  background: var(--glass);
+  backdrop-filter: var(--blur);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+}
+
+#question {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+/* ---------- OPTIONS ---------- */
+.option {
+  display: flex;
+  gap: 12px;
+  padding: 18px;
+  margin-top: 14px;
+  background: var(--glass-strong);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: 0.2s ease;
 }
 
 .option:hover {
-  background: var(--option-hover);
+  border-color: var(--primary);
 }
 
+.option input {
+  margin-top: 4px;
+  accent-color: var(--primary);
+}
+
+.option-text {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ---------- RESULT TEXT ---------- */
 .correct {
   color: var(--success);
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .wrong {
   color: var(--danger);
-  font-weight: 600;
-}
-
-.theme-btn {
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  z-index: 1100;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  color: var(--text);
-  border: 1px solid rgba(0,0,0,0.06);
-  backdrop-filter: blur(6px);
-}
-
-.app-header {
-  position: sticky;
-  top: 0;
-  z-index: 1050;
-  background: transparent;
-  /* Respect device safe top inset and keep a comfortable header height */
-  padding-top: calc(10px + var(--safe-top));
-  padding-bottom: 10px;
-  /* create a subtle boundary so header elements don't feel cramped */
-  padding-left: calc(var(--header-padding-h) + var(--safe-left));
-  padding-right: calc(var(--header-padding-h) + var(--safe-right));
-  min-height: var(--header-min-height);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Ensure inner d-flex row inside header uses consistent gaps and alignment */
-.app-header .d-flex {
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--header-gap);
-  display: flex;
-}
-
-/* Auto-hide header when scrolling down: slide up and fade out */
-.app-header {
-  transition: transform .22s ease, opacity .22s ease;
-}
-
-.app-header.hidden {
-  transform: translateY(calc(-100% - 8px));
-  opacity: 0;
-  pointer-events: none;
-}
-.app-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0;
-  /* allow title to truncate when space is tight */
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Center the timer in the header on larger screens */
-.header-center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1060;
-  pointer-events: none; /* let other header controls receive pointer events */
-}
-.header-center .timer { pointer-events: auto; }
-
-/* On small screens the header stacks vertically so the timer should be in flow */
-@media (max-width: 420px) {
-  .header-center {
-    position: static;
-    transform: none;
-    margin-top: 8px;
-    pointer-events: auto;
-  }
-}
-.timer {
-  padding: 6px 10px;
-  border-radius: 8px;
-  background: rgba(0,0,0,0.04);
-  color: var(--text);
-  font-weight: 700;
-  min-width: 96px;
-  text-align: center;
-}
-
-.timer.warning {
-  background: rgba(239,68,68,0.08);
-  color: var(--danger);
-  box-shadow: 0 0 0 6px rgba(239,68,68,0.03);
+  font-weight: 800;
 }
 
 .muted {
-  color: var(--muted);
-  font-size: 0.95rem;
+  color: var(--text-muted);
 }
 
-/* Question tracker (fixed bottom) */
+/* ---------- QUESTION BAR ---------- */
 .question-bar {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 1200;
+  padding: 12px 14px;
   display: flex;
-  gap: 8px;
-  padding: 10px 12px;
+  gap: 10px;
   justify-content: center;
-  align-items: center;
-  background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
-  backdrop-filter: blur(6px);
-  border-top: 1px solid rgba(0,0,0,0.06);
+  background: var(--glass);
+  backdrop-filter: var(--blur);
+  border-top: 1px solid var(--border);
   overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
-  touch-action: pan-x;
-  white-space: nowrap;
-  flex-wrap: nowrap;
-  /* Smooth scrolling and snap to keep the first item visible on mobile */
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
 }
-
-.question-item { scroll-snap-align: center; }
 
 .question-item {
-  min-width: 44px;
-  height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  padding: 6px 10px;
-  font-weight: 700;
-  background: var(--option-bg);
-  color: var(--text);
-  border: 1px solid rgba(0,0,0,0.06);
+  min-width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  font-weight: 800;
+  background: var(--glass-strong);
+  border: none;
   cursor: pointer;
-  flex: 0 0 auto;
 }
 
-.question-item:focus {
-  outline: 3px solid rgba(59,130,246,0.18);
-  outline-offset: 2px;
-}
 .question-item.active {
-  box-shadow: 0 6px 18px rgba(11,15,30,0.08);
-  transform: translateY(-2px);
+  outline: 3px solid var(--primary);
 }
 
-.question-item.status-none {
-  background: #f3f4f6; /* light grey - without attempt */
-  color: var(--muted);
-}
+.status-correct { background: var(--success); color: #fff; }
+.status-wrong { background: var(--danger); color: #fff; }
+.status-saved { background: var(--warning); color: #fff; }
 
-.question-item.status-attempt {
-  background: #e5e7eb; /* darker grey - attempted but not solved */
-  color: var(--text);
-}
-
-.question-item.status-correct {
-  background: var(--success);
-  color: #fff;
-}
-
-.question-item.status-wrong {
-  background: var(--danger);
-  color: #fff;
-}
-
-.question-item.status-saved {
-  background: #fb923c; /* orange */
-  color: #fff;
-}
-
-.saved-indicator { color: #fbbf24; margin-left: 4px; }
-
-/* Explanation bulb (Marathi) and panel */
-.exp-bulb {
-  background: transparent;
-  border: 0;
-  color: var(--muted);
-  font-size: 1.25rem;
-  padding: 6px 8px;
-  border-radius: 8px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.exp-bulb:focus { outline: 3px solid rgba(59,130,246,0.18); outline-offset: 2px; }
-
-/* blinking/glow effect to draw attention */
-.exp-bulb.blink .fa {
-  color: #f59e0b; /* amber */
-  text-shadow: 0 0 8px rgba(245,158,11,0.6);
-  animation: bulb-glow 1.6s infinite ease-in-out;
-}
-
-@keyframes bulb-glow {
-  0% { transform: scale(1); opacity: 0.9; }
-  50% { transform: scale(1.08); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.9; }
-}
-
-.explanation-panel {
-  background: var(--card-bg);
-  color: var(--text);
-  border-radius: 10px;
-  padding: 12px;
-  border: 1px solid rgba(0,0,0,0.06);
-  box-shadow: 0 10px 30px rgba(11,15,30,0.06);
-  font-size: 0.98rem;
-  line-height: 1.45;
-  max-height: 220px;
-  overflow: auto;
-  white-space: normal;
-}
-
-.explanation-panel[hidden] { display: none; }
-
-/* Ensure Marathi text uses correct fallback font and is readable */
-.explanation-panel[lang="mr"] { font-family: 'Noto Sans Devanagari', system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial; }
-
-/* Result dashboard (right side) */
+/* ---------- RESULT DASHBOARD ---------- */
 .result-dashboard {
   position: fixed;
-  right: 12px;
-  top: calc(56px + 20px); /* 20px gap from header/timer */
-  width: 260px;
-  max-width: 45%;
-  bottom: 84px; /* keep above the question bar */
-  z-index: 1190;
-  background: var(--card-bg);
-  border: 1px solid rgba(0,0,0,0.06);
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(11,15,30,0.08);
-  padding: 12px;
-  overflow: auto;
-  transition: transform .22s ease, opacity .22s ease;
-  /* hidden by default - only show when explicitly opened */
-  transform: translateY(18px);
+  right: 16px;
+  bottom: 160px;
+  width: 270px;
+  background: var(--glass);
+  backdrop-filter: var(--blur);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.15);
   opacity: 0;
   pointer-events: none;
+  transform: translateY(20px);
+  transition: 0.25s ease;
 }
 
-/* When the dashboard has the 'open' class it becomes visible */
 .result-dashboard.open {
-  transform: translateY(0);
   opacity: 1;
   pointer-events: auto;
+  transform: translateY(0);
 }
 
-.result-dashboard .dashboard-percent {
-  font-size: 1.75rem;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 8px;
-}
-
-/* Floating result toggle (rectangular) — now positioned bottom center */
+/* ---------- FLOATING RESULT BUTTON ---------- */
 .result-toggle {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  /* place above the question tracker/dashboard area */
-  bottom: calc(84px + var(--safe-bottom));
-  z-index: 1310;
-  background: var(--card-bg);
-  color: var(--text);
-  border: 1px solid rgba(0,0,0,0.06);
-  border-radius: 10px;
-  min-width: 120px;
-  height: 44px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  box-shadow: 0 6px 18px rgba(11,15,30,0.06);
-  cursor: pointer;
-  transition: transform .12s ease, box-shadow .12s ease;
-  /* Improve touch responsiveness */
-  touch-action: manipulation;
-  -ms-touch-action: manipulation;
-  -webkit-tap-highlight-color: rgba(0,0,0,0.06);
-  -webkit-user-select: none;
-}
-
-/* Slightly smaller icon and bold label */
-.result-toggle i { font-size: 1rem; }
-.result-toggle .result-label {
-  font-weight: 700;
-  font-size: 0.95rem;
-  line-height: 1;
-  margin-left: 2px;
-}
-
-.result-toggle .result-badge {
-  font-size: 0.72rem;
+  bottom: calc(150px + var(--safe-bottom));
+  background: var(--primary);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 999px;
   font-weight: 800;
-  background: var(--option-bg);
-  color: var(--text);
-  padding: 4px 8px;
-  border-radius: 999px;
-  margin-left: 6px;
-  border: 1px solid rgba(0,0,0,0.04);
-}
-
-/* Focus and hover states */
-.result-toggle:focus,
-.result-toggle:hover {
-  box-shadow: 0 8px 26px rgba(11,15,30,0.08);
-  transform: translate(-50%, -2px);
-  outline: none;
-}
-
-/* Touch-specific larger hit area for devices without hover */
-@media (hover: none) and (pointer: coarse) {
-  .result-toggle { min-width: 120px; height: 56px; padding: 8px 14px; }
-  .result-toggle .result-badge { padding: 6px 10px; }
-}
-
-/* On small screens we move the toggle further up to avoid overlapping the mobile actions and keep label visible */
-@media (max-width: 420px) {
-  /* Move results toggle to top-left on mobile as requested and show icon-only */
-  .result-toggle {
-    top: calc(12px + var(--safe-top));
-    left: calc(12px + var(--safe-left));
-    bottom: auto;
-    transform: none;
-    min-width: 44px;
-    width: 44px;
-    height: 44px;
-    padding: 6px;
-    border-radius: 50%;
-    justify-content: center;
-  }
-
-  /* Hide the textual label and percent badge on phones so only the logo is visible */
-  .result-toggle .result-label { display: none; }
-  .result-toggle .result-badge { display: none; }
-
-  /* ensure results dashboard sits above mobile actions when opened */
-  .result-dashboard { width: 260px; bottom: calc(160px + var(--safe-bottom)); }
-
-  /* keep mobile action bar visible and avoid overlap */
-  .mobile-actions { bottom: calc(12px + var(--safe-bottom)); }
-}
-.result-dashboard .dashboard-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  color: var(--muted);
-}
-
-.result-dashboard .saved-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-}
-
-/* Subtle pill styling for saved items */
-.result-dashboard .saved-item {
-  padding: 6px 10px;
-  background: rgba(0,0,0,0.03);
-  border-radius: 999px;
-  font-weight: 700;
-  cursor: pointer;
-  border: 1px solid rgba(0,0,0,0.06);
-  color: var(--text);
-  font-size: 0.85rem;
-}
-
-.result-dashboard .saved-item:hover { opacity: 0.95; }
-
-.dashboard-toggle {
-  display: none;
-  margin-top: 8px;
-}
-
-/* Small screens: make dashboard slide in as a compact panel */
-@media (max-width: 900px) {
-  .result-dashboard {
-    right: 12px;
-    width: 260px;
-    top: auto;
-    bottom: 110px; /* above question bar, leave extra space */
-    transform: translateY(18px);
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .result-dashboard.open {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* Make dashboard toggle visible as a fixed small button */
-  .dashboard-toggle.d-none { display: inline-block; }
-  .dashboard-toggle {
-    position: fixed;
-    right: 12px;
-    bottom: 150px;
-    z-index: 1210;
-    padding: 8px 10px;
-    border-radius: 10px;
-    background: var(--card-bg);
-    border: 1px solid rgba(0,0,0,0.06);
-    box-shadow: 0 6px 18px rgba(11,15,30,0.06);
-    font-weight: 700;
-  }
-}
-
-@media (max-width: 420px) {
-  .result-dashboard { width: 220px; }
-  .result-dashboard .saved-item { padding: 4px 6px; font-size: 0.8rem; }
-  .dashboard-toggle { bottom: 140px; padding: 6px 8px; }
-}
-
-/* Add space at bottom so content doesn't sit under the bar */
-body {
-  padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
-}
-
-/* Respect device safe area insets (iPhone notch, Android cutouts) */
-:root {
-  --safe-top: env(safe-area-inset-top, 0px);
-  --safe-right: env(safe-area-inset-right, 0px);
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --safe-left: env(safe-area-inset-left, 0px);
-}
-
-/* Theme button: respect safe area */
-.theme-btn {
-  top: calc(12px + var(--safe-top));
-  right: calc(12px + var(--safe-right));
-}
-
-/* Mobile action bar (visible on small screens) */
-.mobile-actions {
-  display: none;
-  position: fixed;
-  left: calc(12px + var(--safe-left));
-  right: calc(12px + var(--safe-right));
-  bottom: calc(12px + var(--safe-bottom));
-  gap: 8px;
+  box-shadow: 0 12px 30px rgba(37,99,235,0.45);
   z-index: 1300;
-  pointer-events: auto;
-  justify-content: center;
+}
+
+/* ---------- MOBILE ACTION BAR ---------- */
+.mobile-actions {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(82px + var(--safe-bottom));
+  display: none;
+  gap: 10px;
+  z-index: 1250;
 }
 
 .mobile-actions .btn {
-  min-height: 52px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  font-size: 1rem;
-  flex: 1 1 auto;
+  flex: 1;
+  min-height: 54px;
+  border-radius: 16px;
+  font-weight: 700;
 }
 
-/* Responsive rules for phones (Samsung, iPhone typical widths) */
+/* ---------- THEME TOGGLE ---------- */
+.theme-btn {
+  position: fixed;
+  top: calc(14px + var(--safe-top));
+  right: 14px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--glass);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--border);
+  z-index: 1400;
+}
+
+/* ---------- MOBILE SAFE MODE ---------- */
 @media (max-width: 420px) {
+
   .quiz-box {
-    margin-top: 34px;
-    padding: 16px;
-    max-width: 94%;
+    margin-top: 24px;
+    padding: 18px;
   }
 
-  h3 {
+  #question {
     font-size: 1.05rem;
-  }
-
-  .app-header .d-flex {
-    flex-direction: column;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .app-title {
-    font-size: 1.125rem;
-    text-align: center;
-  }
-
-  .timer {
-    min-width: auto;
-    padding: 8px 12px;
   }
 
   .option {
     padding: 16px;
-    font-size: 1rem;
-    min-height: 56px;
   }
 
-  .question-bar {
-    padding-left: calc(12px + var(--safe-left));
-    padding-right: calc(12px + var(--safe-right));
+  .mobile-actions {
+    display: flex;
+    background: var(--glass);
+    backdrop-filter: var(--blur);
+    padding: 10px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
   }
 
-  .question-item { min-width: 48px; height: 48px; }
-
-  .theme-btn {
-    width: 44px;
-    height: 44px;
+  .result-toggle {
+    top: calc(12px + var(--safe-top));
+    left: 12px;
+    bottom: auto;
+    transform: none;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  #bg { display: none; }
-
-  /* show mobile action bar (do NOT hide desktop submit buttons per request) */
-  .mobile-actions { 
-    display: flex; 
-    background: var(--card-bg);
-    padding: 8px;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(11,15,30,0.06);
-    backdrop-filter: blur(6px);
-    /* position mobile actions above the question tracker */
-    bottom: calc(76px + var(--safe-bottom));
-  }
-  /* Keep desktop submit visible on small screens to avoid overriding actions */
-  .mobile-actions .btn + .btn { margin-left: 8px; }
-  /* ensure quiz content has room for the mobile-actions bar */
-  .quiz-box { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
-}
-
-@media (max-width: 375px) {
-  h3 { font-size: 1rem; }
-}
-
-@media (max-width: 360px) {
-  .quiz-box {
-    margin-top: 28px;
-    padding: 12px;
+  .result-toggle span {
+    display: none;
   }
 
-  h3 {
-    font-size: 0.98rem;
+  .result-dashboard {
+    width: 230px;
+    right: 12px;
+    bottom: 190px;
   }
-
-  .mobile-actions .btn { min-height: 48px; font-size: 0.95rem; }
 }
